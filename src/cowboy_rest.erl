@@ -1616,7 +1616,7 @@ respond(Req0, State, StatusCode) ->
 	%% except when the status code is 200 because it might have
 	%% been intended (for example sending an empty file).
 	Req = case cowboy_req:has_resp_body(Req0) of
-		true when StatusCode =:= 200 -> Req0;
+		_ when StatusCode =:= 200 -> Req0;
 		true -> Req0;
 		false -> cowboy_req:delete_resp_header(<<"content-type">>, Req0)
 	end,
